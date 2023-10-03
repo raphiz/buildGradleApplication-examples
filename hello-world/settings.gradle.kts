@@ -3,29 +3,13 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
-        System.getenv("MAVEN_SOURCE_REPOSITORY")?.let {
-            maven(it) {
-                metadataSources {
-                    gradleMetadata()
-                    mavenPom()
-                    artifact()
-                }
-            }
-        } ?: gradlePluginPortal()
+        gradlePluginPortal()
     }
 }
 
 dependencyResolutionManagement {
     repositories {
-        System.getenv("MAVEN_SOURCE_REPOSITORY")?.let {
-            maven(it) {
-                metadataSources {
-                    gradleMetadata()
-                    mavenPom()
-                    artifact()
-                }
-            }
-        } ?: mavenCentral()
+        mavenCentral()
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 }
