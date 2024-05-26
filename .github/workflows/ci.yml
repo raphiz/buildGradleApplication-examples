@@ -12,3 +12,4 @@ jobs:
       - run: nix flake check
       - run: nix build --print-build-logs .#helloWorld
       - run: nix build --print-build-logs .#springBoot
+      - run: nix build --print-build-logs .#funkyDependencies

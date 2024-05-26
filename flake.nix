@@ -34,6 +34,10 @@
             inherit version;
           };
 
+          funkyDependencies = pkgs.callPackage ./funky-dependencies/package.nix {
+            inherit version;
+          };
+
           springBoot = pkgs.callPackage ./spring-boot/package.nix {
             inherit version;
           };
@@ -41,7 +45,7 @@
 
         devShells.default = with pkgs;
           mkShellNoCC {
-            buildInputs = [jdk gradle updateVerificationMetadata];
+            buildInputs = [jdk gradle updateVerificationMetadata updateGradleVersion];
           };
 
         formatter = pkgs.alejandra;
