@@ -9,7 +9,12 @@ buildGradleApplication {
   src = ./.;
   dependencyFilter = depSpec:
   # kotlinx-serialization-core-metadata-x.y.z.jar is not uploaded to m2...
-    !(depSpec.component.group == "org.jetbrains.kotlinx" && depSpec.component.name == "kotlinx-serialization-core" && lib.hasSuffix depSpec.name "kotlinx-serialization-core-metadata-1.6.1.jar");
+    !(
+      depSpec.component.group
+      == "org.jetbrains.kotlinx"
+      && depSpec.component.name == "kotlinx-serialization-core"
+      && lib.strings.match "^kotlinx-serialization-core-metadata-[0-9]+\.[0-9]+\.[0-9]+\.jar$" depSpec.name != null
+    );
   meta = with lib; {
     description = "Example project with funky dependencies";
     longDescription = ''

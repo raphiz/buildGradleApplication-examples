@@ -19,9 +19,17 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "x86_64-darwin" "aarch64-darwin" "aarch64-linux"];
       flake = {
-        overlays.default = final: prev: {
+        overlays.default = final: prev: let
           jdk = prev.jdk22_headless;
-          gradle = prev.gradle;
+        in {
+          jdk = jdk;
+          java = jdk;
+          gradle = prev.callPackage (prev.gradleGen {
+            version = "8.7";
+            nativeVersion = "0.22-milestone-25";
+            hash = "sha256-VEw11r2Emuil7QvOo5umd9xA9J330YNVYVgtogCblh0=";
+            defaultJava = jdk;
+          }) {};
         };
       };
       perSystem = {
@@ -32,8 +40,8 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
-            build-gradle-application.overlays.default
             self.overlays.default
+            build-gradle-application.overlays.default
           ];
         };
       in {
@@ -53,7 +61,7 @@
 
         devShells.default = with pkgs;
           mkShellNoCC {
-            buildInputs = [jdk gradle updateVerificationMetadata updateGradleVersion];
+            buildInputs = [jdk gradle updateVerificationMetadata];
           };
 
         formatter = pkgs.alejandra;
