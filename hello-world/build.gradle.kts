@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "2.0.0"
     application
 }
 
@@ -23,7 +23,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-val javaVersion = JavaLanguageVersion.of("17")
+val javaVersion = JavaLanguageVersion.of("22")
 
 java {
     toolchain {
@@ -35,7 +35,6 @@ tasks.withType<KotlinCompile> {
     compilerOptions {
         freeCompilerArgs.set(listOf("-Xjsr305=strict"))
         jvmTarget.set(JvmTarget.fromTarget(javaVersion.toString()))
-        languageVersion.set(KotlinVersion.KOTLIN_1_8)
     }
 }
 
