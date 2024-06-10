@@ -2,7 +2,7 @@
   description = "Example usage of buildGradleApplication";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     build-gradle-application.url = "github:raphiz/buildGradleApplication";
   };
@@ -18,7 +18,12 @@
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "x86_64-darwin" "aarch64-darwin" "aarch64-linux"];
-
+      flake = {
+        overlays.default = final: prev: {
+          jdk = prev.jdk22_headless;
+          gradle = prev.gradle;
+        };
+      };
       perSystem = {
         config,
         system,
@@ -26,7 +31,10 @@
       }: let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [build-gradle-application.overlays.default];
+          overlays = [
+            build-gradle-application.overlays.default
+            self.overlays.default
+          ];
         };
       in {
         packages = {
