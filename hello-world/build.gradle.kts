@@ -43,3 +43,9 @@ tasks.withType<AbstractArchiveTask>().configureEach {
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
+
+configurations.all {
+    resolutionStrategy {
+        failOnNonReproducibleResolution()
+    }
+}
