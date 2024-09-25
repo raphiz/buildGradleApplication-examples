@@ -19,7 +19,7 @@ dependencies {
     
     // implicitly requires kotlinx-serialization-core-metadata-x.y.z.jar which is not uploaded to m2
     // `kotlinx-serialization-core-metadata-x.y.z.jar` must hence be filtered from the verification-metadata.xml
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.3")
 
     testImplementation(kotlin("test"))
 }
