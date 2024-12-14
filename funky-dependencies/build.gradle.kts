@@ -28,7 +28,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-val javaVersion = JavaLanguageVersion.of("22")
+val javaVersion = JavaLanguageVersion.of("21")
 
 java {
     toolchain {

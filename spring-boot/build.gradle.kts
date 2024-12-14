@@ -25,7 +25,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-val javaVersion = JavaLanguageVersion.of("22")
+val javaVersion = JavaLanguageVersion.of("21")
 
 java {
     toolchain {

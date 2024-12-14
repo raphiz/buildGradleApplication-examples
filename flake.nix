@@ -2,7 +2,7 @@
   description = "Example usage of buildGradleApplication";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     build-gradle-application.url = "github:raphiz/buildGradleApplication";
   };
@@ -20,16 +20,10 @@
       systems = ["x86_64-linux" "x86_64-darwin" "aarch64-darwin" "aarch64-linux"];
       flake = {
         overlays.default = final: prev: let
-          jdk = prev.jdk22_headless;
+          jdk = prev.jdk21_headless;
         in {
           jdk = jdk;
           java = jdk;
-          gradle = prev.callPackage (prev.gradleGen {
-            version = "8.7";
-            nativeVersion = "0.22-milestone-25";
-            hash = "sha256-VEw11r2Emuil7QvOo5umd9xA9J330YNVYVgtogCblh0=";
-            defaultJava = jdk;
-          }) {};
         };
       };
       perSystem = {
