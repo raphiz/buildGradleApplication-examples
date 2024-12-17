@@ -7,19 +7,15 @@ buildGradleApplication {
   pname = "funky-dependencies";
   version = version;
   src = ./.;
-  dependencyFilter = depSpec:
-  # kotlinx-serialization-core-metadata-x.y.z.jar is not uploaded to m2...
-    !(
-      depSpec.component.group
-      == "org.jetbrains.kotlinx"
-      && depSpec.component.name == "kotlinx-serialization-core"
-      && lib.strings.match "^kotlinx-serialization-core-metadata-[0-9]+\.[0-9]+\.[0-9]+\.jar$" depSpec.name != null
-    );
   meta = with lib; {
     description = "Example project with funky dependencies";
     longDescription = ''
-      There are some dependencies that need extra work.
-      This project uses some of these to showcase it.
+      Lots of libraries have references to metadata jars that are not present on maven central, for example:
+      - kasechange-metadata-1.4.1.jar (net.pearx.kasechange:kasechange)
+      - kotlin-result-metadata-2.0.0.jar (com.michael-bull.kotlin-result:kotlin-result)
+      - kotlinx-serialization-core-metadata-1.7.0.jar (org.jetbrains.kotlinx:kotlinx-serialization-core)
+      These will make the nix build fail because we cannot fetch them. They are usually not needed for the build, so it's relatively safe to ignore them by default.
+      However, it MIGHT be the case that some -metadata.jars ARE actually required but I have not yet found one. If you do, please open an issue!
     '';
     sourceProvenance = with sourceTypes; [
       fromSource

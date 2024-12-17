@@ -24,6 +24,12 @@
         in {
           jdk = jdk;
           java = jdk;
+          # gradle = prev.callPackage (prev.gradleGen {
+          #   version = "8.7";
+          #   nativeVersion = "0.22-milestone-25";
+          #   hash = "sha256-VEw11r2Emuil7QvOo5umd9xA9J330YNVYVgtogCblh0=";
+          #   defaultJava = jdk;
+          # }) {};
         };
       };
       perSystem = {
