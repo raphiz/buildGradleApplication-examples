@@ -2,7 +2,7 @@
   description = "Example usage of buildGradleApplication";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     build-gradle-application.url = "github:raphiz/buildGradleApplication";
   };
